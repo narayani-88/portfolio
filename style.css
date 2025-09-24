@@ -68,58 +68,7 @@ body::before {
     opacity: 0.9;
 }
 
-.profile-image-container {
-    margin-bottom: 30px;
-    position: relative;
-    z-index: 2;
-}
-
-.profile-image {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 20px;
-}
-
-.profile-image img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-    border: 5px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: auto;
-}
-
-.profile-image:hover img {
-    transform: scale(1.05);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
-}
-
-.profile-ring {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1.1);
-        opacity: 0;
-    }
-}
+/* Profile image styles removed - clean imageless design */
 
 .profile-info {
     position: relative;
@@ -127,23 +76,29 @@ body::before {
 }
 
 .name {
-    font-size: 3.5rem;
+    font-size: 4rem;
     font-weight: 700;
-    margin-bottom: 15px;
-    background: linear-gradient(45deg, #fff, #f8f9ff);
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #fff, #D2C1B6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: fadeInUp 1s ease-out;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+    letter-spacing: 2px;
+    margin-top: 20px;
 }
 
 .tagline {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    opacity: 0.9;
-    font-weight: 400;
+    font-size: 1.4rem;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    font-weight: 500;
     animation: fadeInUp 1s ease-out 0.2s both;
+    line-height: 1.5;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .contact-links {
