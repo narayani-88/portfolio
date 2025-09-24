@@ -1,0 +1,19 @@
+# Personal images - keep private
+narayani.jpeg
+*.jpeg
+*.jpg
+
+# Project screenshots - keep private
+nIds.png
+nSploit.png
+nHash.png
+nRecon.png
+homoglyph.png
+qunatum.jfif
+*.png
+*.jfif
+
+# System files
+.DS_Store
+Thumbs.db
+*.log
