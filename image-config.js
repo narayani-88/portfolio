@@ -30,9 +30,13 @@ const ImageConfig = {
 // Auto-detect environment
 const isLocal = window.location.hostname === 'localhost' || 
                 window.location.hostname === '127.0.0.1' || 
-                window.location.protocol === 'file:';
+                window.location.protocol === 'file:' ||
+                window.location.hostname === '';
 
 const currentConfig = isLocal ? ImageConfig.local : ImageConfig.production;
+console.log('Environment detected:', isLocal ? 'LOCAL' : 'PRODUCTION');
+console.log('Current hostname:', window.location.hostname);
+console.log('Current protocol:', window.location.protocol);
 
 // Function to load images dynamically
 function loadImages() {
@@ -45,26 +49,31 @@ function loadImages() {
         console.log('Profile image set to:', currentConfig.profile);
     }
     
-    // Load project images by checking current src
+    // Load project images with error handling
+    const imageMap = {
+        'nIds.png': currentConfig.projects.nids,
+        'nSploit.png': currentConfig.projects.nsploit,
+        'nHash.png': currentConfig.projects.nhash,
+        'nRecon.png': currentConfig.projects.nrecon,
+        'homoglyph.png': currentConfig.projects.homoglyph,
+        'qunatum.jfif': currentConfig.projects.quantum
+    };
+    
     document.querySelectorAll('.project-image img').forEach((img, index) => {
         const currentSrc = img.getAttribute('src');
+        const filename = currentSrc.split('/').pop();
         
-        // Map based on current image names
-        if (currentSrc.includes('nIds.png') || currentSrc.includes('NIDS')) {
-            img.src = currentConfig.projects.nids;
-        } else if (currentSrc.includes('nSploit.png') || currentSrc.includes('nSploit')) {
-            img.src = currentConfig.projects.nsploit;
-        } else if (currentSrc.includes('nHash.png') || currentSrc.includes('Hash')) {
-            img.src = currentConfig.projects.nhash;
-        } else if (currentSrc.includes('nRecon.png') || currentSrc.includes('Recon')) {
-            img.src = currentConfig.projects.nrecon;
-        } else if (currentSrc.includes('homoglyph.png') || currentSrc.includes('Homoglyph')) {
-            img.src = currentConfig.projects.homoglyph;
-        } else if (currentSrc.includes('qunatum.jfif') || currentSrc.includes('Quantum')) {
-            img.src = currentConfig.projects.quantum;
+        if (imageMap[filename]) {
+            img.src = imageMap[filename];
+            console.log(`Project image ${index} (${filename}) set to:`, img.src);
+            
+            // Add error handling
+            img.onerror = function() {
+                console.error('Failed to load image:', this.src);
+                // Fallback to a working image
+                this.src = 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop';
+            };
         }
-        
-        console.log('Project image', index, 'set to:', img.src);
     });
 }
 
