@@ -13,16 +13,16 @@ const ImageConfig = {
         }
     },
     
-    // For public hosting - use placeholder or hosted images
+    // For public hosting - use professional stock images
     production: {
-        profile: 'https://via.placeholder.com/150x150/234C6A/D2C1B6?text=NP',
+        profile: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
         projects: {
-            nids: 'https://via.placeholder.com/400x250/234C6A/D2C1B6?text=NIDS+Project',
-            nsploit: 'https://via.placeholder.com/400x250/344F1F/D2C1B6?text=nSploit+Tool',
-            nhash: 'https://via.placeholder.com/400x250/234C6A/D2C1B6?text=HashSleuth',
-            nrecon: 'https://via.placeholder.com/400x250/344F1F/D2C1B6?text=Nrecon+Tool',
-            homoglyph: 'https://via.placeholder.com/400x250/234C6A/D2C1B6?text=Homoglyph+Detector',
-            quantum: 'https://via.placeholder.com/400x250/344F1F/D2C1B6?text=Quantum+Journey'
+            nids: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
+            nsploit: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=250&fit=crop',
+            nhash: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=250&fit=crop',
+            nrecon: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=250&fit=crop',
+            homoglyph: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=250&fit=crop',
+            quantum: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=250&fit=crop'
         }
     }
 };
@@ -36,28 +36,35 @@ const currentConfig = isLocal ? ImageConfig.local : ImageConfig.production;
 
 // Function to load images dynamically
 function loadImages() {
+    console.log('Loading images for environment:', isLocal ? 'local' : 'production');
+    
     // Load profile image
     const profileImg = document.querySelector('#profile-pic');
     if (profileImg) {
         profileImg.src = currentConfig.profile;
+        console.log('Profile image set to:', currentConfig.profile);
     }
     
-    // Load project images
-    const projectImages = {
-        'nIds.png': currentConfig.projects.nids,
-        'nSploit.png': currentConfig.projects.nsploit,
-        'nHash.png': currentConfig.projects.nhash,
-        'nRecon.png': currentConfig.projects.nrecon,
-        'homoglyph.png': currentConfig.projects.homoglyph,
-        'qunatum.jfif': currentConfig.projects.quantum
-    };
-    
-    // Replace all project images
-    document.querySelectorAll('.project-image img').forEach(img => {
-        const filename = img.src.split('/').pop();
-        if (projectImages[filename]) {
-            img.src = projectImages[filename];
+    // Load project images by checking current src
+    document.querySelectorAll('.project-image img').forEach((img, index) => {
+        const currentSrc = img.getAttribute('src');
+        
+        // Map based on current image names
+        if (currentSrc.includes('nIds.png') || currentSrc.includes('NIDS')) {
+            img.src = currentConfig.projects.nids;
+        } else if (currentSrc.includes('nSploit.png') || currentSrc.includes('nSploit')) {
+            img.src = currentConfig.projects.nsploit;
+        } else if (currentSrc.includes('nHash.png') || currentSrc.includes('Hash')) {
+            img.src = currentConfig.projects.nhash;
+        } else if (currentSrc.includes('nRecon.png') || currentSrc.includes('Recon')) {
+            img.src = currentConfig.projects.nrecon;
+        } else if (currentSrc.includes('homoglyph.png') || currentSrc.includes('Homoglyph')) {
+            img.src = currentConfig.projects.homoglyph;
+        } else if (currentSrc.includes('qunatum.jfif') || currentSrc.includes('Quantum')) {
+            img.src = currentConfig.projects.quantum;
         }
+        
+        console.log('Project image', index, 'set to:', img.src);
     });
 }
 
