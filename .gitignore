@@ -1,17 +1,15 @@
-# Personal images - keep private
+# Personal profile image - keep private
 narayani.jpeg
 *.jpeg
 *.jpg
 
-# Project screenshots - keep private
-nIds.png
-nSploit.png
-nHash.png
-nRecon.png
-homoglyph.png
-qunatum.jfif
-*.png
-*.jfif
+# Keep project images public - they're okay to show
+# nIds.png
+# nSploit.png  
+# nHash.png
+# nRecon.png
+# homoglyph.png
+# qunatum.jfif
 
 # System files
 .DS_Store
